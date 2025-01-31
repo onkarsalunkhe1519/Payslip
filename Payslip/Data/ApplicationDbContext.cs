@@ -19,6 +19,8 @@ namespace Pulse360Payslip.Data
         public DbSet<Earning> Earning { get; set; }
         public DbSet<EarningType> EarningType { get; set; }
         public DbSet<EmployeeSalaries> EmployeeSalaries { get; set; }
+        public DbSet<EmployeeEarnings> EmployeeEarnings { get; set; }
+        public DbSet<EmployeeDeductions> EmployeeDeductions { get; set; }
 
 
 
