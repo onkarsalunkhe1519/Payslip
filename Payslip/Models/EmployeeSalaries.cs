@@ -12,8 +12,7 @@ namespace Payslip.Models
         [ForeignKey("User")]
         public int UserId { get; set; }
         [Column(TypeName = "decimal(18,2)")]
-        public decimal BasicSalary { get; set; }
-
+        public decimal TotalSalary { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal NetSalary { get; set; }
 

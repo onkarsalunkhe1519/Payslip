@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pulse360Payslip.Data;
 
@@ -11,9 +12,11 @@ using Pulse360Payslip.Data;
 namespace Payslip.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250201062510_hi1")]
+    partial class hi1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,58 +24,6 @@ namespace Payslip.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Payslip.Models.Attendance", b =>
-                {
-                    b.Property<int>("AttendanceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AttendanceId"));
-
-                    b.Property<decimal>("BreakHours")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("CheckIn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("CheckOut")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Late")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("LunchIn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("LunchOut")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("OvertimeHours")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("ProductionHours")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("WorkingHours")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("AttendanceId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Attendance");
-                });
 
             modelBuilder.Entity("Payslip.Models.Deduction", b =>
                 {
@@ -257,13 +208,13 @@ namespace Payslip.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SalaryId"));
 
+                    b.Property<decimal>("BasicSalary")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("NetSalary")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("TotalSalary")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -277,77 +228,6 @@ namespace Payslip.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("EmployeeSalaries");
-                });
-
-            modelBuilder.Entity("Payslip.Models.Organization", b =>
-                {
-                    b.Property<int>("OrganizationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrganizationId"));
-
-                    b.Property<string>("OrganizationAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrganizationDescription")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("OrganizationEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrganizationLogo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrganizationName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("OrganizationPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OrganizationId");
-
-                    b.ToTable("Organization");
-                });
-
-            modelBuilder.Entity("Payslip.Models.Payslips", b =>
-                {
-                    b.Property<int>("PayslipId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PayslipId"));
-
-                    b.Property<DateTime>("GeneratedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Month")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PayslipPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("PayslipId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Payslips");
                 });
 
             modelBuilder.Entity("Pulse360Payslip.Models.Department", b =>
@@ -495,17 +375,6 @@ namespace Payslip.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Payslip.Models.Attendance", b =>
-                {
-                    b.HasOne("Pulse360Payslip.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Payslip.Models.Deduction", b =>
                 {
                     b.HasOne("Payslip.Models.DeductionType", "DeductionType")
@@ -583,17 +452,6 @@ namespace Payslip.Migrations
                 });
 
             modelBuilder.Entity("Payslip.Models.EmployeeSalaries", b =>
-                {
-                    b.HasOne("Pulse360Payslip.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Payslip.Models.Payslips", b =>
                 {
                     b.HasOne("Pulse360Payslip.Models.User", "User")
                         .WithMany()

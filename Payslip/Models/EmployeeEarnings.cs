@@ -10,7 +10,8 @@ namespace Payslip.Models
 
         [ForeignKey("EmployeeSalaries")]
         public int SalaryId { get; set; }
-
+        [ForeignKey("User")]
+        public int UserId { get; set; }
 
         [ForeignKey("Earning")]
         public int EarningId { get; set; }

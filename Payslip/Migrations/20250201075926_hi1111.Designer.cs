@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pulse360Payslip.Data;
 
@@ -11,9 +12,11 @@ using Pulse360Payslip.Data;
 namespace Payslip.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250201075926_hi1111")]
+    partial class hi1111
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -318,38 +321,6 @@ namespace Payslip.Migrations
                     b.ToTable("Organization");
                 });
 
-            modelBuilder.Entity("Payslip.Models.Payslips", b =>
-                {
-                    b.Property<int>("PayslipId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PayslipId"));
-
-                    b.Property<DateTime>("GeneratedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Month")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PayslipPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("PayslipId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Payslips");
-                });
-
             modelBuilder.Entity("Pulse360Payslip.Models.Department", b =>
                 {
                     b.Property<int>("DepartmentId")
@@ -583,17 +554,6 @@ namespace Payslip.Migrations
                 });
 
             modelBuilder.Entity("Payslip.Models.EmployeeSalaries", b =>
-                {
-                    b.HasOne("Pulse360Payslip.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Payslip.Models.Payslips", b =>
                 {
                     b.HasOne("Pulse360Payslip.Models.User", "User")
                         .WithMany()

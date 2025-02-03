@@ -21,6 +21,9 @@ namespace Pulse360Payslip.Data
         public DbSet<EmployeeSalaries> EmployeeSalaries { get; set; }
         public DbSet<EmployeeEarnings> EmployeeEarnings { get; set; }
         public DbSet<EmployeeDeductions> EmployeeDeductions { get; set; }
+        public DbSet<Organization> Organization { get; set; }
+        public DbSet<Attendance> Attendance { get; set; }
+        public DbSet<Payslips> Payslips { get; set; }
 
 
 

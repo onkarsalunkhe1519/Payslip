@@ -30,7 +30,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
+   name: "default",
     pattern: "{controller=Payslip}/{action=AddEmployeeSalary}/{id?}");
 
 app.Run();
